@@ -357,8 +357,8 @@
 "Assets/V1/Script/Datas.cs"
 "Assets/V1/Script/Player.cs"
 "Assets/V1/Script/SaveSystem.cs"
-"Assets/V2/Scripts/Datas1.cs"
 "Assets/V2/Scripts/Player1.cs"
+"Assets/V2/Scripts/PlayerData.cs"
 "Assets/V2/Scripts/SaveSystem1.cs"
 -langversion:9.0
 

@@ -8,18 +8,20 @@ using UnityEngine;
 
 public static class SaveSystem1
 {
-    internal static void SavePlayer()
+    internal static void SavePlayer(Player1 player)
     {
         BinaryFormatter formatter = new BinaryFormatter();
 
         FileStream stream = new FileStream("player.bin", FileMode.Create);
 
-        formatter.Serialize(stream, Datas.Puan);
+        PlayerData data = new PlayerData(player);
+
+        formatter.Serialize(stream, data);
 
         stream.Close();
     }
 
-    internal static void LoadPlayer()
+    internal static PlayerData LoadPlayer()
     {
 
         string dosyaadi = "player.bin";
@@ -30,17 +32,15 @@ public static class SaveSystem1
 
             FileStream stream = new FileStream("player.bin", FileMode.Open);
 
-            Datas1.Puan = Convert.ToInt32(formatter.Deserialize(stream));
+            PlayerData data = formatter.Deserialize(stream) as PlayerData;
+
             stream.Close();
+            return data;
         }
         else
         {
             Debug.LogError("Dosya Yok");
         }
-
-
-
-
-
+        return null;
     }
 }

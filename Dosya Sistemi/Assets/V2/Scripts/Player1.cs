@@ -1,17 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
 using UnityEngine.UI;
 using TMPro;
 
 public class Player1 : MonoBehaviour
 {
 
-    [SerializeField]
-    private InputField gelenPuanDegeri;
+    public int Puan;
 
-    [SerializeField]
-    private InputField gelenAdDegeri;
+    public string Ad;
+
 
     [SerializeField]
     private TextMeshProUGUI puanText;
@@ -23,20 +23,29 @@ public class Player1 : MonoBehaviour
 
     void Start()
     {
-        Datas1.Puan = 20;
-        Datas1.Ad = "Rýdvan";
+        //Datas1.Puan = 20;
+        //Datas1.Ad = "Rýdvan";
     }
 
     public void Save()
     {
-        Datas1.Puan = System.Convert.ToInt32(gelenPuanDegeri.text);
+        //Datas1.Puan = System.Convert.ToInt32(gelenPuanDegeri.text);
 
-        SaveSystem1.SavePlayer();
+        SaveSystem1.SavePlayer(this);
+        Load();
     }
 
     public void Load()
     {
-        SaveSystem1.LoadPlayer();
-        puanText.text = Datas1.Puan.ToString();
+        if (!File.Exists("player.bin"))
+            return;
+        PlayerData data = SaveSystem1.LoadPlayer();
+
+        puanText.text = data.Puan.ToString();
+
+        adText.text = data.Name;
+
+        Puan = data.Puan;
+        Ad = data.Name;
     }
 }
